@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: iperf-server
+  labels:
+    app: iperf-server
+spec:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - pod-worker
+            topologyKey: kubernetes.io/hostname
+  containers:
+    - name: iperf3-server
+      image: networkstatic/iperf3
+      args:
+        - "-s"
+      ports:
+        - name: iperf3-tcp
+          containerPort: 5201
+          protocol: "TCP"
+        - name: iperf3-udp
+          containerPort: 5201
+          protocol: "UDP"

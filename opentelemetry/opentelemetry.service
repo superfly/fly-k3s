@@ -1,0 +1,19 @@
+[Unit]
+Description=OpenTelemetry Collector
+Documentation=https://opentelemetry.io/docs/collector/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=always
+User=otelcol
+Environment=HOSTNAME=%H
+EnvironmentFile=/etc/default/otelcol
+WorkingDirectory=/var/lib/otelcol
+ExecStart=/usr/bin/otelcol --config.file $CONFIG_FILE $CUSTOM_ARGS
+ExecReload=/usr/bin/env kill -HUP $MAINPID
+TimeoutStopSec=20s
+SendSIGKILL=no
+
+[Install]
+WantedBy=multi-user.target

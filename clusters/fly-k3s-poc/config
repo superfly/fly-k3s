@@ -1,0 +1,16 @@
+# shellcheck shell=bash disable=SC2034
+
+CLUSTER_NAME=fly-k3s-poc
+CLUSTER_CIDR="dead:beef:1:0::/56,10.1.0.0/16"
+SERVICE_CIDR="dead:beef:1:1::/112,10.2.0.0/16"
+CLUSTER_DNS="dead:beef:1:1::10"
+REGION=sjc
+NODE_GROUP_SIZE=6
+VOLUME_SIZE=250
+VOLUME_NAME=fly_k3s_poc_data
+WORKER_VM_SIZE=shared-cpu-4x
+WORKER_VM_MEMORY=6144
+CP_VM_SIZE=shared-cpu-4x
+CP_VM_MEMORY=4096
+K3S_VERSION="v1.24.15+k3s1"
+ORG_NAME="fly-org-slug-goes-here"
